@@ -14,6 +14,15 @@
   </ol>
 </p>
 
+<p>
+  <strong>Due Date:</strong>
+    <ol>
+  <% for task in @todo_list.tasks %>
+  	<li><%=h task.due %></li>
+  	<% end %>
+  </ol>
+</p>
+
 
 <%= link_to 'Edit', edit_todo_list_path(@todo_list) %> |
 <%= link_to 'Back', todo_lists_path %>
