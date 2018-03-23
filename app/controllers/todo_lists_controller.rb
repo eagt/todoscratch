@@ -10,18 +10,16 @@ class TodoListsController < ApplicationController
   # GET /todo_lists/1
   # GET /todo_lists/1.json
   def show
+    @todo_list = TodoListist.find(params[:id])
   end
 
   # GET /todo_lists/new
   def new
     @todo_list = TodoList.new
+    @todo_list.categories.build.build_task
   end
 
-  # GET /todo_lists/1/edit
-  def edit
-  end
-
-  # POST /todo_lists
+    # POST /todo_lists
   # POST /todo_lists.json
   def create
     @todo_list = TodoList.new(todo_list_params)
@@ -35,6 +33,11 @@ class TodoListsController < ApplicationController
         format.json { render json: @todo_list.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+
+  # GET /todo_lists/1/edit
+  def edit
   end
 
   # PATCH/PUT /todo_lists/1
@@ -69,6 +72,6 @@ class TodoListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_list_params
-      params.require(:todo_list).permit(:name, tasks_attributes: Task.attribute_names.map(&:to_sym).push(:_destroy))# I'm passing all the Task attributes to be accepted 
+      params.require(:todo_list).permit(:name, categories_attributes: [:name, tasks_attributes: Task.attribute_names.map(&:to_sym).push(:_destroy)])# I'm passing all the Task attributes to be accepted 
     end
 end

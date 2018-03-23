@@ -1,3 +1,4 @@
 class Task < ApplicationRecord
-  belongs_to :todo_list, optional: true
+  has_many :categories
+  has_many :todo_lists, through: :categories
 end

@@ -9,7 +9,12 @@ Rails.application.routes.draw do
 		  member do
 		  	get :delete
 		  end  	
+		  resources :categories do
+		  member do
+		  	get :delete
+		  end 
 		  end
 		end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+ end
 end

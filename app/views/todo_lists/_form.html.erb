@@ -17,24 +17,25 @@
   </div>
 
 <%#- What is below is what will be shown when the nested form is called %>
- <table class='table'>
-  <thead>
-     <tr>
-       <th></th>
-       <th>Task Name</th>
-       <th>Completed</th>
-       <th>Due</th>
-     </tr>
-  </thead>
-  <tbody class='tasks'>
-     <%= f.simple_fields_for :tasks do |builder| %>
-      <%= render 'task_fields', f: builder %>
-     <% end %>
-  </tbody>
- </table>
+ <div class="form-group">
+    <%= f.label :Name %>:
+    <%= f.text_field :name, :class => 'form-control' %>
+
+    <div id="task">
+      <label>Tasks:</label>
+        <%= f.fields_for :category do |builder| %>
+        <%= render 'category_fields', f: builder %>
+      <div id="links">
+        <%= link_to_add_association "add Taks", f, :categories %><br/>
+      </div>
+        <% end %>
+    </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
     <%= link_to_add_association 'Add Task', f, :tasks, class: 'btn btn-primary', data: { association_insertion_node: '.tasks', association_insertion_method: :append} %>
   </div>
+
+</div>
 <% end %>
+
